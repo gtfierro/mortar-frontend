@@ -9,6 +9,7 @@ import (
 	//"strings"
 
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
+	hodgrpc "github.com/gtfierro/hod/proto"
 	mdalgrpc "github.com/gtfierro/mdal/proto"
 	"github.com/rs/cors"
 	//"golang.org/x/crypto/acme/autocert"
@@ -57,7 +58,11 @@ func main() {
 	//&tls.Config{}
 	if err := mdalgrpc.RegisterMDALHandlerFromEndpoint(context.Background(), grpcmux, "corbusier.cs.berkeley.edu:8088", opts); err != nil {
 		log.Fatal(err)
-		panic(err)
+	}
+
+	hodmux := runtime.NewServeMux()
+	if err := hodgrpc.RegisterHodDBHandlerFromEndpoint(context.Background(), hodmux, "localhost:47809", opts); err != nil {
+		log.Fatal(err)
 	}
 
 	static := http.FileServer(http.Dir("static"))
@@ -69,6 +74,8 @@ func main() {
 	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		if r.URL.Path == "/v1/mdal/query" {
 			grpcmux.ServeHTTP(w, r)
+		} else if r.URL.Path == "/v1/hod/query" {
+			hodmux.ServeHTTP(w, r)
 		} else {
 			static.ServeHTTP(w, r)
 		}
