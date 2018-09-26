@@ -1,10 +1,29 @@
 Vue.use(VueRouter)
 
+var cache = new Vue({
+    created: function(){
+        localforage.setDriver(localforage.INDEXEDDB);
+
+    },
+    methods: {
+        get: function(key) {
+            return localforage.getItem(key);
+        },
+        put: function(key, value) {
+            //console.log("put", key, value);
+            localforage.setItem(key, value);
+            //this.cache.then( (cache) => {cache.put(new Request(key), new Response(value))});
+            //this.cache[key] = value;
+        },
+    },
+})
+
 var mdal = new Vue({
     methods: {
         query: function(q) {
-            console.log(q);
-            return this.client.then( (res) => { return res.apis.MDAL.DataQuery({body: q}) })
+            var self = this;
+            //console.log(q);
+            return self.client.then( (res) => { return res.apis.MDAL.DataQuery({body: q}) })
         }
     },
     created: function() {
@@ -43,9 +62,15 @@ var hod = new Vue({
     },
     methods: {
         query: function(q) {
-            console.log("QUERY",q);
+            //console.log("QUERY",q);
+            return cache.get(q).then( (res) => {
+                //console.log(res, res == undefined, res == null);
+                if (res == undefined) {
+                    return this.client.then( (res) => { return res.apis.HodDB.ExecuteQuery({body: {query: q}}) })
+                }
+                return new Promise(function(resolve, reject) { return resolve(res) });
+            });
             //return this.client.apis.HodDB.ExecuteQuery({body: {query: q}});
-            return this.client.then( (res) => { return res.apis.HodDB.ExecuteQuery({body: {query: q}}) })
         },
     },
     created: function() {
@@ -65,10 +90,12 @@ var hod = new Vue({
                 self.sites.forEach(function(site) {
                     self.query("COUNT * FROM " + site + " WHERE { ?x rdf:type ?y };").then((res) => {
                         //self.$set(self.sitemeta, site, {'entities': res.obj.count})
+                        cache.put("COUNT * FROM " + site + " WHERE { ?x rdf:type ?y };", res);
                         var meta = {'entities': res.obj.count};
                         return meta;
                     }).then( (meta) => {
                         self.query("LIST VERSIONS FOR " + site + ";").then( (res) => {
+                            cache.put("LIST VERSIONS FOR " + site + ";", res);
                             if (res.obj.rows != null) {
                                 meta['versions'] = res.obj.rows.map(function(r) {
                                     return r.uris[1].value;
@@ -78,6 +105,7 @@ var hod = new Vue({
                             return meta;
                         }).then( (r) => {
                             self.query("SELECT ?prop ?value FROM " + site + " WHERE { ?s rdf:type brick:Site . ?s ?prop ?value };").then( (res) => {
+                                cache.put("SELECT ?prop ?value FROM " + site + " WHERE { ?s rdf:type brick:Site . ?s ?prop ?value };", res);
                                 if (res.obj.rows != null) {
                                     res.obj.rows.forEach(function(r) {
                                         if ((r.uris[0].value != 'isSiteOf')) {
@@ -200,7 +228,9 @@ const EquipmentList = {
     props: ['site'],
     mounted: function() {
         var self = this;
+        var q = "SELECT ?equiptype ?equip FROM " + this.site + " WHERE { ?equip rdf:type/rdfs:subClassOf* brick:Equipment . ?equip rdf:type ?equiptype };";
         hod.query("SELECT ?equiptype ?equip FROM " + this.site + " WHERE { ?equip rdf:type/rdfs:subClassOf* brick:Equipment . ?equip rdf:type ?equiptype };").then( (res) => {
+            cache.put(q, res);
             res.obj.rows.forEach(function(r) {
                 var type = r.uris[0].value;
                 var name = r.uris[1].value;
@@ -390,15 +420,15 @@ const EquipmentViewWithPlot = {
         },
         getResolution: function(hours) {
             if (hours <= 1 ) {
-                return '30s';
+                return '1m';
             } else if (hours <= 24) {
-                return '5m';
+                return '10m';
             } else if (hours <= 24 * 7) {
-                return '30m';
-            } else if (hours <= 24 * 30) {
                 return '1h';
-            } else {
+            } else if (hours <= 24 * 30) {
                 return '1d';
+            } else {
+                return '7d';
             }
         },
         plot: function(data, labels) {
@@ -433,7 +463,7 @@ const EquipmentViewWithPlot = {
             var self = this;
             console.log(dateFns.format(self.start, "YYYY-MM-DDTHH:mm:ssZ'"));
             var hours = dateFns.differenceInHours(self.start, self.end)
-            mdal.query({
+            var q = {
                 composition: ["data"],
                 aggregation: {data: {funcs: ["MEAN"]}},
                 variables: {data: {
@@ -448,8 +478,10 @@ const EquipmentViewWithPlot = {
                     window: self.getResolution(hours),
                     aligned: true,
                 },
-            }).then( (res) => {
+            };
+            mdal.query(q).then( (res) => {
                 var data = [];
+                cache.put(q, res);
                 console.log(res);
                 self.hasdata = (res.obj.result.uuids != null);
                 if (res.obj.result.error != null) {
@@ -993,12 +1025,12 @@ const routes = [
   { path: '/', component: Home , name: 'home'},
   { path: '/browse', component: Browse, name: 'browse'},
   { path: '/view/:site', component: View, props: true, name: 'viewsite'},
-  { path: '/equip/:site', component: EquipmentList, props: true, name: 'viewequip'},
   { path: '/equip/:site/list/:classname?', component: EquipmentViewWithPlot, props: true, name: 'equiplist'},
   { path: '/point/:site/:class', component: TimeViz, props: true, name: 'plotviz'},
   { path: '/plot/:uuids', component: PlotViz, props: true, name: 'pointviz'},
 ]
 
+  // { path: '/equip/:site', component: EquipmentList, props: true, name: 'viewequip'},
 const router = new VueRouter({
   routes // short for `routes: routes`
 })
