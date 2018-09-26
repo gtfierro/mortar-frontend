@@ -15,7 +15,7 @@
     "application/json"
   ],
   "paths": {
-    "http://localhost:47808/v1/hod/query": {
+    "/v1/hod/query": {
       "post": {
         "operationId": "ExecuteQuery",
         "responses": {
