@@ -149,8 +149,7 @@
       "type": "object",
       "properties": {
         "uuid": {
-          "type": "string",
-          "format": "byte"
+          "type": "string"
         },
         "row": {
           "type": "object",
