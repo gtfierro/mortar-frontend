@@ -1,3 +1,4 @@
+VueRangedatePicker.default.install(Vue)
 Vue.use(VueRouter)
 
 var cache = new Vue({
@@ -484,6 +485,11 @@ const EquipmentViewWithPlot = {
             this.end = dateFns.addDays(this.end, amount);
             this.fetchData();
         },
+        onDateSelected: function(chosen) {
+            this.start = chosen.end;
+            this.end = chosen.start;
+            this.fetchData();
+        },
         fetchData: function() {
             var self = this;
             console.log(dateFns.format(self.start, "YYYY-MM-DDTHH:mm:ssZ'"));
@@ -600,6 +606,7 @@ const EquipmentViewWithPlot = {
                     <v-btn small color="blue-grey" class="white--text" v-on:click="adjustDay(30)">+1month</v-btn>\
                     <v-btn small color="blue-grey" class="white--text" v-on:click="adjustDay(365)">+1year</v-btn>\
                     <v-overflow-btn :items="widths" label="Width" editable item-value="text" overflow></v-overflow-btn>\
+                    <div class="daterange-wrapper"><vue-rangedate-picker @selected="onDateSelected" i18n="EN"></vue-rangedate-picker></div>\
                 </v-layout>\
                 <v-layout row wrap>\
                     <v-flex xs10>\
