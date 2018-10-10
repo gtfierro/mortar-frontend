@@ -3,9 +3,11 @@ Vue.use(VueRouter)
 var cache = new Vue({
     created: function(){
         localforage.setDriver(localforage.INDEXEDDB);
-
     },
     methods: {
+        clear: function() {
+            localforage.clear();
+        },
         get: function(key) {
             return localforage.getItem(key);
         },
@@ -66,11 +68,22 @@ var hod = new Vue({
             return cache.get(q).then( (res) => {
                 //console.log(res, res == undefined, res == null);
                 if (res == undefined) {
-                    return this.client.then( (res) => { return res.apis.HodDB.ExecuteQuery({body: {query: q}}) })
+                    return this.client.then( 
+                                      (res) => { 
+                                        return res.apis.HodDB.ExecuteQuery({body: {query: q}}) 
+                                      }).then(
+                                      (queryresult) => {
+                                        return new Promise(function(resolve, reject) { cache.put(q, queryresult); return resolve(queryresult) });
+                                      });
                 }
-                return new Promise(function(resolve, reject) { return resolve(res) });
+                return new Promise(function(resolve, reject) { cache.put(q, res); return resolve(res) });
             });
             //return this.client.apis.HodDB.ExecuteQuery({body: {query: q}});
+        },
+    },
+    computed: {
+        percentcomplete: function() {
+            return 100 * Object.keys(this.sitemeta).length / this.sites.length;
         },
     },
     created: function() {
@@ -90,12 +103,12 @@ var hod = new Vue({
                 self.sites.forEach(function(site) {
                     self.query("COUNT * FROM " + site + " WHERE { ?x rdf:type ?y };").then((res) => {
                         //self.$set(self.sitemeta, site, {'entities': res.obj.count})
-                        cache.put("COUNT * FROM " + site + " WHERE { ?x rdf:type ?y };", res);
+                        //cache.put("COUNT * FROM " + site + " WHERE { ?x rdf:type ?y };", res);
                         var meta = {'entities': res.obj.count};
                         return meta;
                     }).then( (meta) => {
                         self.query("LIST VERSIONS FOR " + site + ";").then( (res) => {
-                            cache.put("LIST VERSIONS FOR " + site + ";", res);
+                            //cache.put("LIST VERSIONS FOR " + site + ";", res);
                             if (res.obj.rows != null) {
                                 meta['versions'] = res.obj.rows.map(function(r) {
                                     return r.uris[1].value;
@@ -105,7 +118,7 @@ var hod = new Vue({
                             return meta;
                         }).then( (r) => {
                             self.query("SELECT ?prop ?value FROM " + site + " WHERE { ?s rdf:type brick:Site . ?s ?prop ?value };").then( (res) => {
-                                cache.put("SELECT ?prop ?value FROM " + site + " WHERE { ?s rdf:type brick:Site . ?s ?prop ?value };", res);
+                                //cache.put("SELECT ?prop ?value FROM " + site + " WHERE { ?s rdf:type brick:Site . ?s ?prop ?value };", res);
                                 if (res.obj.rows != null) {
                                     res.obj.rows.forEach(function(r) {
                                         if ((r.uris[0].value != 'isSiteOf')) {
@@ -172,8 +185,11 @@ const Browse = {
         sitemeta: function() {
             return hod.sitemeta;
         },
+        siteLoadProgress: function() {
+            return hod.percentcomplete;
+        },
         sitetabledata: function() {
-            return Object.entries(hod.sitemeta).map(function(o) {
+            return Object.entries(hod.sitemeta).map(function(o, idx) {
                 var site = o[0];
                 var meta = o[1];
                 return {site: site,
@@ -196,6 +212,7 @@ const Browse = {
     template: '\
         <div>\
             <h2 class="text-xs-left display-1 font-weight-bold py-3">Site Browser</h2>\
+            <v-progress-linear v-if="this.siteLoadProgress < 100" color="info" height="10" :value="this.siteLoadProgress"></v-progress-linear>\
             <template>\
                 <v-card>\
                     <v-card-title>\
@@ -230,7 +247,7 @@ const EquipmentList = {
         var self = this;
         var q = "SELECT ?equiptype ?equip FROM " + this.site + " WHERE { ?equip rdf:type/rdfs:subClassOf* brick:Equipment . ?equip rdf:type ?equiptype };";
         hod.query("SELECT ?equiptype ?equip FROM " + this.site + " WHERE { ?equip rdf:type/rdfs:subClassOf* brick:Equipment . ?equip rdf:type ?equiptype };").then( (res) => {
-            cache.put(q, res);
+            //cache.put(q, res);
             res.obj.rows.forEach(function(r) {
                 var type = r.uris[0].value;
                 var name = r.uris[1].value;
@@ -400,6 +417,8 @@ const EquipmentViewWithPlot = {
             start: new Date(),
             end: dateFns.addDays(new Date(), -365),
             hasdata: false,
+            minDate: null,
+            maxDate: null,
             widths: [{text: "365d"},
                      {text: "30d"},
                      {text: "7d"},
@@ -425,14 +444,15 @@ const EquipmentViewWithPlot = {
                 return '10m';
             } else if (hours <= 24 * 7) {
                 return '1h';
-            } else if (hours <= 24 * 30) {
-                return '1d';
+            } else if (hours <= 24 * 34) {
+                return '1h';
             } else {
-                return '7d';
+                return '1d';
             }
         },
         plot: function(data, labels) {
             var self = this;
+            if (data.length == 0) { return }
             new Dygraph(document.getElementById("vizdivuuid"),
                 data,
                 {
@@ -443,9 +463,14 @@ const EquipmentViewWithPlot = {
                     labelsSeparateLines: true,
                     legend: "always",
                     zoomCallback: function(minDate, maxDate, yRange) {
-                        console.log(minDate, maxDate, yRange);
-                        self.start = minDate;
-                        self.end = maxDate;
+                        console.log(minDate, maxDate, yRange, minDate==self.minDate, maxDate==self.maxDate);
+                        if (maxDate == self.maxDate || minDate == self.minDate) {
+                            return;
+                        }
+                        self.start = maxDate;
+                        self.end = minDate;
+                        self.maxDate = maxDate;
+                        self.minDate = minDate;
                         self.fetchData();
                         //var hours = (maxDate - minDate) / (1000*60*60);
                         //console.log("HOURS", hours);
@@ -463,6 +488,7 @@ const EquipmentViewWithPlot = {
             var self = this;
             console.log(dateFns.format(self.start, "YYYY-MM-DDTHH:mm:ssZ'"));
             var hours = dateFns.differenceInHours(self.start, self.end)
+            console.log("HOURS",hours);
             var q = {
                 composition: ["data"],
                 aggregation: {data: {funcs: ["MEAN"]}},
@@ -479,9 +505,10 @@ const EquipmentViewWithPlot = {
                     aligned: true,
                 },
             };
+            console.log(q);
             mdal.query(q).then( (res) => {
                 var data = [];
-                cache.put(q, res);
+                //cache.put(q, res);
                 console.log(res);
                 self.hasdata = (res.obj.result.uuids != null);
                 if (res.obj.result.error != null) {
@@ -497,7 +524,7 @@ const EquipmentViewWithPlot = {
                     Promise.all(uuidlabels).then(values => {
                         console.log(values);
                         values.forEach(v => {
-                            console.log(v);
+                            //console.log(v);
                             labels.push(v.obj.rows[0].uris[0].value);
                         });
                         for (i=0;i<res.obj.result.times.length;i++) {
@@ -822,7 +849,7 @@ Vue.component('navigation', {
         },
     },
     template: '\
-        <v-navigation-drawer app v-if="true">\
+        <v-navigation-drawer app permanent v-if="true">\
             <v-toolbar flat>\
                 <v-list>\
                     <v-list-tile>\
