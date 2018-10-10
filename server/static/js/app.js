@@ -417,6 +417,7 @@ const EquipmentViewWithPlot = {
             uuids: [],
             start: new Date(),
             end: dateFns.addDays(new Date(), -365),
+            loadingData: false,
             hasdata: false,
             minDate: null,
             maxDate: null,
@@ -453,6 +454,7 @@ const EquipmentViewWithPlot = {
         },
         plot: function(data, labels) {
             var self = this;
+            self.loadingData = false;
             if (data.length == 0) { return }
             new Dygraph(document.getElementById("vizdivuuid"),
                 data,
@@ -492,6 +494,7 @@ const EquipmentViewWithPlot = {
         },
         fetchData: function() {
             var self = this;
+            self.loadingData = true;
             console.log(dateFns.format(self.start, "YYYY-MM-DDTHH:mm:ssZ'"));
             var hours = dateFns.differenceInHours(self.start, self.end)
             console.log("HOURS",hours);
@@ -590,6 +593,7 @@ const EquipmentViewWithPlot = {
     template: '\
         <div>\
             <h2 class="text-xs-left display-1 font-weight-bold py-3"><b>{{ site }}</b> - Equipment Browser <span v-if="this.classname != null"> - {{ classname }}</span></h2>\
+            <v-progress-linear v-if="loadingData" :indeterminate="true"></v-progress-linear>\
             <div id="vizdiv">\
                 <v-layout row wrap>\
                     <v-flex xs12>\
