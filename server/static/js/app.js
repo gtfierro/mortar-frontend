@@ -213,7 +213,7 @@ const Browse = {
     template: '\
         <div>\
             <h2 class="text-xs-left display-1 font-weight-bold py-3">Site Browser</h2>\
-            <v-progress-linear v-if="this.siteLoadProgress < 100" color="info" height="10" :value="this.siteLoadProgress"></v-progress-linear>\
+            <v-progress-linear :indeterminate="this.siteLoadProgress == 0" v-if="this.siteLoadProgress < 100" color="info" height="10" :value="this.siteLoadProgress"></v-progress-linear>\
             <template>\
                 <v-card>\
                     <v-card-title>\
@@ -482,6 +482,21 @@ const EquipmentViewWithPlot = {
                 }
             );
         },
+        filter: function(rows, term, x) {
+            console.log(rows, term, x);
+            var terms = term.split(" ");
+            return rows.filter( o => {
+                var ret = false;
+                for (let term of terms) {
+                    ret = JSON.stringify(o).toLowerCase().indexOf(term) !== -1;
+                    if (!ret) {
+                        break
+                    }
+                }
+                return ret
+                
+            });
+        },
         adjustDay: function(amount) {
             this.start = dateFns.addDays(this.start, amount);
             this.end = dateFns.addDays(this.end, amount);
@@ -628,7 +643,7 @@ const EquipmentViewWithPlot = {
                         <v-btn color="info" v-if="this.classname != null" v-bind:to="this.equiplink">All</router-link></v-btn>\
                         <v-text-field v-model="search" append-icon="search" label="Search" single-line hide-details></v-text-field>\
                     </v-card-title>\
-                    <v-data-table :headers="this.headers" :items="this.rows" v-model="selected" item-key="uuid" select-all :search="search" lass="elevation-1" :rows-per-page-items="this.pageitems">\
+                    <v-data-table :headers="this.headers" :items="this.rows" v-model="selected" item-key="uuid" select-all :search="search" :custom-filter="filter" lass="elevation-1" :rows-per-page-items="this.pageitems">\
                         <template slot="headerCell" slot-scope="props">\
                             <v-tooltip bottom>\
                                 <span slot="activator">{{ props.header.text }}</span>\
