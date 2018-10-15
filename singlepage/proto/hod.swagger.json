@@ -1,0 +1,108 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "hod.proto",
+    "version": "version not set"
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/hod/query": {
+      "post": {
+        "operationId": "ExecuteQuery",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/protoQueryResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/protoQueryRequest"
+            }
+          }
+        ],
+        "tags": [
+          "HodDB"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "protoQueryRequest": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string"
+        }
+      }
+    },
+    "protoQueryResponse": {
+      "type": "object",
+      "properties": {
+        "variable": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "rows": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protoRow"
+          }
+        },
+        "count": {
+          "type": "string",
+          "format": "int64"
+        },
+        "elapsed": {
+          "type": "string",
+          "format": "int64"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "protoRow": {
+      "type": "object",
+      "properties": {
+        "uris": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protoURI"
+          }
+        }
+      }
+    },
+    "protoURI": {
+      "type": "object",
+      "properties": {
+        "namespace": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,34 @@
+syntax = "proto3";
+package proto;
+
+import "hod.proto";
+import "google/api/annotations.proto";
+
+service Mortar {
+    // returns list of sites that match the qualification filter
+    rpc Qualify(QualifyRequest) returns (QualifyResponse) {
+        option (google.api.http) = {
+            post: "/v1/mortar/qualify"
+            body: "*"
+        };
+    }
+    //rpc Fetch(FetchRequest) returns (FetchResponse);
+
+    // rpc ListApps
+}
+
+message QualifyRequest {
+    // all of these queries must return a response for the site to be considered
+    // qualified
+    repeated QueryRequest requiredqueries = 1;
+
+    // only one of these needs to return a response for the site to be
+    // considered qualified
+    repeated QueryRequest optionalqueries = 2;
+}
+
+message QualifyResponse {
+    string error = 1;
+    // list of sitenames
+    repeated string sites = 2;
+}

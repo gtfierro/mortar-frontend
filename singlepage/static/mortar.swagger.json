@@ -1,0 +1,90 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "mortar.proto",
+    "version": "version not set"
+  },
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/mortar/qualify": {
+      "post": {
+        "summary": "returns list of sites that match the qualification filter",
+        "operationId": "Qualify",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/protoQualifyResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/protoQualifyRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Mortar"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "protoQualifyRequest": {
+      "type": "object",
+      "properties": {
+        "requiredqueries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protoQueryRequest"
+          },
+          "title": "all of these queries must return a response for the site to be considered\nqualified"
+        },
+        "optionalqueries": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protoQueryRequest"
+          },
+          "title": "only one of these needs to return a response for the site to be\nconsidered qualified"
+        }
+      }
+    },
+    "protoQualifyResponse": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "string"
+        },
+        "sitename": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "list of sitenames"
+        }
+      }
+    },
+    "protoQueryRequest": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
