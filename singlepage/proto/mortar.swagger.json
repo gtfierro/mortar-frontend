@@ -15,6 +15,32 @@
     "application/json"
   ],
   "paths": {
+    "/v1/mortar/fetch": {
+      "post": {
+        "operationId": "Fetch",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/protoFetchResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/protoFetchRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Mortar"
+        ]
+      }
+    },
     "/v1/mortar/qualify": {
       "post": {
         "summary": "returns list of sites that match the qualification filter",
@@ -44,6 +70,165 @@
     }
   },
   "definitions": {
+    "DataQueryResponseValueArray": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      }
+    },
+    "DataQueryResponseVarMap": {
+      "type": "object",
+      "properties": {
+        "uuids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "byte"
+          }
+        }
+      }
+    },
+    "protoAggFunc": {
+      "type": "string",
+      "enum": [
+        "RAW",
+        "MEAN",
+        "MIN",
+        "MAX",
+        "COUNT",
+        "SUM"
+      ],
+      "default": "RAW"
+    },
+    "protoAggregation": {
+      "type": "object",
+      "properties": {
+        "funcs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protoAggFunc"
+          }
+        }
+      }
+    },
+    "protoDataQueryRequest": {
+      "type": "object",
+      "properties": {
+        "composition": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "aggregation": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/protoAggregation"
+          }
+        },
+        "variables": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/protoVariable"
+          }
+        },
+        "time": {
+          "$ref": "#/definitions/protoTimeParams"
+        }
+      }
+    },
+    "protoDataQueryResponse": {
+      "type": "object",
+      "properties": {
+        "rows": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protoDataQueryResponseRow"
+          }
+        },
+        "mapping": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/DataQueryResponseVarMap"
+          },
+          "title": "variable name -\u003e list of uuids"
+        },
+        "context": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protoDataQueryResponseRow"
+          },
+          "title": "uuid -\u003e triple context"
+        },
+        "uuids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "arrow": {
+          "type": "string",
+          "format": "byte",
+          "title": "apache arrow serialized response"
+        },
+        "error": {
+          "type": "string"
+        },
+        "times": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "int64"
+          }
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataQueryResponseValueArray"
+          }
+        }
+      }
+    },
+    "protoDataQueryResponseRow": {
+      "type": "object",
+      "properties": {
+        "uuid": {
+          "type": "string"
+        },
+        "row": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "title": "TODO: need to transform this from list of triples to a map\nkeyed by UUID of the triples relevant to that UUID"
+    },
+    "protoFetchRequest": {
+      "type": "object",
+      "properties": {
+        "request": {
+          "$ref": "#/definitions/protoDataQueryRequest"
+        }
+      }
+    },
+    "protoFetchResponse": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "string"
+        },
+        "response": {
+          "$ref": "#/definitions/protoDataQueryResponse"
+        }
+      }
+    },
     "protoQualifyRequest": {
       "type": "object",
       "properties": {
@@ -82,6 +267,44 @@
       "type": "object",
       "properties": {
         "query": {
+          "type": "string"
+        }
+      }
+    },
+    "protoTimeParams": {
+      "type": "object",
+      "properties": {
+        "start": {
+          "type": "string"
+        },
+        "end": {
+          "type": "string"
+        },
+        "window": {
+          "type": "string"
+        },
+        "aligned": {
+          "type": "boolean",
+          "format": "boolean"
+        }
+      }
+    },
+    "protoVariable": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "definition": {
+          "type": "string"
+        },
+        "uuids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "units": {
           "type": "string"
         }
       }

@@ -2,6 +2,7 @@ syntax = "proto3";
 package proto;
 
 import "hod.proto";
+import "mdal.proto";
 import "google/api/annotations.proto";
 
 service Mortar {
@@ -12,7 +13,12 @@ service Mortar {
             body: "*"
         };
     }
-    //rpc Fetch(FetchRequest) returns (FetchResponse);
+    rpc Fetch(FetchRequest) returns (FetchResponse) {
+        option (google.api.http) = {
+            post: "/v1/mortar/fetch"
+            body: "*"
+        };
+    }
 
     // rpc ListApps
 }
@@ -32,3 +38,43 @@ message QualifyResponse {
     // list of sitenames
     repeated string sites = 2;
 }
+
+
+message FetchRequest {
+    DataQueryRequest request = 1;
+
+    //map<string, AggregationList> aggregation = 2;
+    //map<string, VariableDefinition> variables = 3;
+}
+
+message FetchResponse {
+    string error = 1;
+    DataQueryResponse response = 2;
+}
+
+//message AggregationList {
+//    repeated AggFunc funcs = 1;
+//}
+//
+//enum AggFunc {
+//    RAW = 0;
+//    MEAN = 1;
+//    MIN = 2;
+//    MAX = 3;
+//    COUNT = 4;
+//    SUM = 5;
+//}
+//
+//message VariableDefinition {
+//    string name = 1;
+//    string definition = 2;
+//    repeated string uuids = 3;
+//    string units = 4;
+//}
+//
+//message TimeParams {
+//    string start = 1;
+//    string end = 2;
+//    string window = 3;
+//}
+//

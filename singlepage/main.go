@@ -55,8 +55,9 @@ func main() {
 	})
 
 	mortarapi, err := NewMortarAPI(&Config{
-		HodAddress: "localhost:47809",
-		Port:       9001,
+		HodAddress:  "10.4.6.255:47809",
+		MdalAddress: "corbusier.cs.berkeley.edu:8088",
+		Port:        9001,
 	})
 	if err != nil {
 		log.Fatal(err)
@@ -73,7 +74,7 @@ func main() {
 
 	fmt.Println("connect to local hod")
 	hodmux := runtime.NewServeMux()
-	if err := mortarproto.RegisterHodDBHandlerFromEndpoint(context.Background(), hodmux, "localhost:47809", opts); err != nil {
+	if err := mortarproto.RegisterHodDBHandlerFromEndpoint(context.Background(), hodmux, "10.4.6.255:47809", opts); err != nil {
 		log.Fatal(err)
 	}
 	fmt.Println("connected")

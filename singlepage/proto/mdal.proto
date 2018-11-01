@@ -10,6 +10,12 @@ service MDAL {
             body: "*"
         };
     }
+    rpc DataQuery2(DataQueryRequest) returns (stream DataQueryResponse) {
+        option (google.api.http) = {
+            post: "/v1/mdal/query2",
+            body: "*"
+        };
+    }
 }
 
 message DataQueryRequest {
@@ -47,10 +53,13 @@ enum AggFunc {
 }
 
 message DataQueryResponse {
+    // TODO: need to transform this from list of triples to a map
+    // keyed by UUID of the triples relevant to that UUID
     message Row {
-        bytes uuid = 1;
+        string uuid = 1;
         map<string, string> row = 2;
     }
+
     message VarMap {
         repeated bytes uuids = 1;
     }
@@ -58,8 +67,7 @@ message DataQueryResponse {
     message ValueArray {
         repeated double value = 1;
     }
-    // TODO: need to transform this from list of triples to a map
-    // keyed by UUID of the triples relevant to that UUID
+
     repeated Row rows = 1;
     // variable name -> list of uuids
     map<string, VarMap> mapping = 2;
