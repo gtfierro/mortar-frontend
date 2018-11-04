@@ -9,5 +9,5 @@ def run(m, inobject):
         for key, grp in groups.items():
             if len(grp) > 3:
                 print('zone %s stuck at %s over (%s - %s)' % (ctx['?vav'].split('#')[-1], key, grp[0], grp[-1]))
-                res.append(ctx['?vav'], key, grp[0], grp[-1])
+                res.append((ctx['?vav'], key, grp[0], grp[-1]))
     return res
