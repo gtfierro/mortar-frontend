@@ -15,12 +15,12 @@ class MDALStub(object):
       channel: A grpc.Channel.
     """
     self.DataQuery = channel.unary_stream(
-        '/proto.MDAL/DataQuery',
+        '/mdalgrpc.MDAL/DataQuery',
         request_serializer=mdal__pb2.DataQueryRequest.SerializeToString,
         response_deserializer=mdal__pb2.DataQueryResponse.FromString,
         )
     self.DataQuery2 = channel.unary_stream(
-        '/proto.MDAL/DataQuery2',
+        '/mdalgrpc.MDAL/DataQuery2',
         request_serializer=mdal__pb2.DataQueryRequest.SerializeToString,
         response_deserializer=mdal__pb2.DataQueryResponse.FromString,
         )
@@ -59,5 +59,5 @@ def add_MDALServicer_to_server(servicer, server):
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(
-      'proto.MDAL', rpc_method_handlers)
+      'mdalgrpc.MDAL', rpc_method_handlers)
   server.add_generic_rpc_handlers((generic_handler,))

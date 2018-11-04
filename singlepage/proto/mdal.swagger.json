@@ -22,7 +22,7 @@
           "200": {
             "description": "(streaming responses)",
             "schema": {
-              "$ref": "#/definitions/protoDataQueryResponse"
+              "$ref": "#/definitions/mdalgrpcDataQueryResponse"
             }
           }
         },
@@ -32,7 +32,33 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/protoDataQueryRequest"
+              "$ref": "#/definitions/mdalgrpcDataQueryRequest"
+            }
+          }
+        ],
+        "tags": [
+          "MDAL"
+        ]
+      }
+    },
+    "/v1/mdal/query2": {
+      "post": {
+        "operationId": "DataQuery2",
+        "responses": {
+          "200": {
+            "description": "(streaming responses)",
+            "schema": {
+              "$ref": "#/definitions/mdalgrpcDataQueryResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/mdalgrpcDataQueryRequest"
             }
           }
         ],
@@ -67,7 +93,7 @@
         }
       }
     },
-    "protoAggFunc": {
+    "mdalgrpcAggFunc": {
       "type": "string",
       "enum": [
         "RAW",
@@ -79,18 +105,18 @@
       ],
       "default": "RAW"
     },
-    "protoAggregation": {
+    "mdalgrpcAggregation": {
       "type": "object",
       "properties": {
         "funcs": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/protoAggFunc"
+            "$ref": "#/definitions/mdalgrpcAggFunc"
           }
         }
       }
     },
-    "protoDataQueryRequest": {
+    "mdalgrpcDataQueryRequest": {
       "type": "object",
       "properties": {
         "composition": {
@@ -102,29 +128,28 @@
         "aggregation": {
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/protoAggregation"
+            "$ref": "#/definitions/mdalgrpcAggregation"
           }
         },
         "variables": {
           "type": "object",
           "additionalProperties": {
-            "$ref": "#/definitions/protoVariable"
+            "$ref": "#/definitions/mdalgrpcVariable"
           }
         },
         "time": {
-          "$ref": "#/definitions/protoTimeParams"
+          "$ref": "#/definitions/mdalgrpcTimeParams"
         }
       }
     },
-    "protoDataQueryResponse": {
+    "mdalgrpcDataQueryResponse": {
       "type": "object",
       "properties": {
         "rows": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/protoDataQueryResponseRow"
-          },
-          "title": "TODO: need to transform this from list of triples to a map\nkeyed by UUID of the triples relevant to that UUID"
+            "$ref": "#/definitions/mdalgrpcDataQueryResponseRow"
+          }
         },
         "mapping": {
           "type": "object",
@@ -136,7 +161,7 @@
         "context": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/protoDataQueryResponseRow"
+            "$ref": "#/definitions/mdalgrpcDataQueryResponseRow"
           },
           "title": "uuid -\u003e triple context"
         },
@@ -169,12 +194,11 @@
         }
       }
     },
-    "protoDataQueryResponseRow": {
+    "mdalgrpcDataQueryResponseRow": {
       "type": "object",
       "properties": {
         "uuid": {
-          "type": "string",
-          "format": "byte"
+          "type": "string"
         },
         "row": {
           "type": "object",
@@ -182,9 +206,10 @@
             "type": "string"
           }
         }
-      }
+      },
+      "title": "TODO: need to transform this from list of triples to a map\nkeyed by UUID of the triples relevant to that UUID"
     },
-    "protoTimeParams": {
+    "mdalgrpcTimeParams": {
       "type": "object",
       "properties": {
         "start": {
@@ -202,7 +227,7 @@
         }
       }
     },
-    "protoVariable": {
+    "mdalgrpcVariable": {
       "type": "object",
       "properties": {
         "name": {

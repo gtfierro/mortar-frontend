@@ -1,5 +1,5 @@
 syntax = "proto3";
-package proto;
+package mdalgrpc;
 
 import "hod.proto";
 import "mdal.proto";

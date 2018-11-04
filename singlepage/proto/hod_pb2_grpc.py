@@ -15,7 +15,7 @@ class HodDBStub(object):
       channel: A grpc.Channel.
     """
     self.ExecuteQuery = channel.unary_unary(
-        '/proto.HodDB/ExecuteQuery',
+        '/mdalgrpc.HodDB/ExecuteQuery',
         request_serializer=hod__pb2.QueryRequest.SerializeToString,
         response_deserializer=hod__pb2.QueryResponse.FromString,
         )
@@ -42,5 +42,5 @@ def add_HodDBServicer_to_server(servicer, server):
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(
-      'proto.HodDB', rpc_method_handlers)
+      'mdalgrpc.HodDB', rpc_method_handlers)
   server.add_generic_rpc_handlers((generic_handler,))

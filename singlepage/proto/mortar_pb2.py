@@ -20,9 +20,9 @@ from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='mortar.proto',
-  package='proto',
+  package='mdalgrpc',
   syntax='proto3',
-  serialized_pb=_b('\n\x0cmortar.proto\x12\x05proto\x1a\thod.proto\x1a\nmdal.proto\x1a\x1cgoogle/api/annotations.proto\"l\n\x0eQualifyRequest\x12,\n\x0frequiredqueries\x18\x01 \x03(\x0b\x32\x13.proto.QueryRequest\x12,\n\x0foptionalqueries\x18\x02 \x03(\x0b\x32\x13.proto.QueryRequest\"/\n\x0fQualifyResponse\x12\r\n\x05\x65rror\x18\x01 \x01(\t\x12\r\n\x05sites\x18\x02 \x03(\t\"8\n\x0c\x46\x65tchRequest\x12(\n\x07request\x18\x01 \x01(\x0b\x32\x17.proto.DataQueryRequest\"J\n\rFetchResponse\x12\r\n\x05\x65rror\x18\x01 \x01(\t\x12*\n\x08response\x18\x02 \x01(\x0b\x32\x18.proto.DataQueryResponse2\xb2\x01\n\x06Mortar\x12W\n\x07Qualify\x12\x15.proto.QualifyRequest\x1a\x16.proto.QualifyResponse\"\x1d\x82\xd3\xe4\x93\x02\x17\"\x12/v1/mortar/qualify:\x01*\x12O\n\x05\x46\x65tch\x12\x13.proto.FetchRequest\x1a\x14.proto.FetchResponse\"\x1b\x82\xd3\xe4\x93\x02\x15\"\x10/v1/mortar/fetch:\x01*b\x06proto3')
+  serialized_pb=_b('\n\x0cmortar.proto\x12\x08mdalgrpc\x1a\thod.proto\x1a\nmdal.proto\x1a\x1cgoogle/api/annotations.proto\"r\n\x0eQualifyRequest\x12/\n\x0frequiredqueries\x18\x01 \x03(\x0b\x32\x16.mdalgrpc.QueryRequest\x12/\n\x0foptionalqueries\x18\x02 \x03(\x0b\x32\x16.mdalgrpc.QueryRequest\"/\n\x0fQualifyResponse\x12\r\n\x05\x65rror\x18\x01 \x01(\t\x12\r\n\x05sites\x18\x02 \x03(\t\";\n\x0c\x46\x65tchRequest\x12+\n\x07request\x18\x01 \x01(\x0b\x32\x1a.mdalgrpc.DataQueryRequest\"M\n\rFetchResponse\x12\r\n\x05\x65rror\x18\x01 \x01(\t\x12-\n\x08response\x18\x02 \x01(\x0b\x32\x1b.mdalgrpc.DataQueryResponse2\xbe\x01\n\x06Mortar\x12]\n\x07Qualify\x12\x18.mdalgrpc.QualifyRequest\x1a\x19.mdalgrpc.QualifyResponse\"\x1d\x82\xd3\xe4\x93\x02\x17\"\x12/v1/mortar/qualify:\x01*\x12U\n\x05\x46\x65tch\x12\x16.mdalgrpc.FetchRequest\x1a\x17.mdalgrpc.FetchResponse\"\x1b\x82\xd3\xe4\x93\x02\x15\"\x10/v1/mortar/fetch:\x01*b\x06proto3')
   ,
   dependencies=[hod__pb2.DESCRIPTOR,mdal__pb2.DESCRIPTOR,google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
@@ -31,20 +31,20 @@ DESCRIPTOR = _descriptor.FileDescriptor(
 
 _QUALIFYREQUEST = _descriptor.Descriptor(
   name='QualifyRequest',
-  full_name='proto.QualifyRequest',
+  full_name='mdalgrpc.QualifyRequest',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='requiredqueries', full_name='proto.QualifyRequest.requiredqueries', index=0,
+      name='requiredqueries', full_name='mdalgrpc.QualifyRequest.requiredqueries', index=0,
       number=1, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='optionalqueries', full_name='proto.QualifyRequest.optionalqueries', index=1,
+      name='optionalqueries', full_name='mdalgrpc.QualifyRequest.optionalqueries', index=1,
       number=2, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -62,27 +62,27 @@ _QUALIFYREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=76,
-  serialized_end=184,
+  serialized_start=79,
+  serialized_end=193,
 )
 
 
 _QUALIFYRESPONSE = _descriptor.Descriptor(
   name='QualifyResponse',
-  full_name='proto.QualifyResponse',
+  full_name='mdalgrpc.QualifyResponse',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='error', full_name='proto.QualifyResponse.error', index=0,
+      name='error', full_name='mdalgrpc.QualifyResponse.error', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='sites', full_name='proto.QualifyResponse.sites', index=1,
+      name='sites', full_name='mdalgrpc.QualifyResponse.sites', index=1,
       number=2, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -100,20 +100,20 @@ _QUALIFYRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=186,
-  serialized_end=233,
+  serialized_start=195,
+  serialized_end=242,
 )
 
 
 _FETCHREQUEST = _descriptor.Descriptor(
   name='FetchRequest',
-  full_name='proto.FetchRequest',
+  full_name='mdalgrpc.FetchRequest',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='request', full_name='proto.FetchRequest.request', index=0,
+      name='request', full_name='mdalgrpc.FetchRequest.request', index=0,
       number=1, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -131,27 +131,27 @@ _FETCHREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=235,
-  serialized_end=291,
+  serialized_start=244,
+  serialized_end=303,
 )
 
 
 _FETCHRESPONSE = _descriptor.Descriptor(
   name='FetchResponse',
-  full_name='proto.FetchResponse',
+  full_name='mdalgrpc.FetchResponse',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='error', full_name='proto.FetchResponse.error', index=0,
+      name='error', full_name='mdalgrpc.FetchResponse.error', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='response', full_name='proto.FetchResponse.response', index=1,
+      name='response', full_name='mdalgrpc.FetchResponse.response', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -169,8 +169,8 @@ _FETCHRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=293,
-  serialized_end=367,
+  serialized_start=305,
+  serialized_end=382,
 )
 
 _QUALIFYREQUEST.fields_by_name['requiredqueries'].message_type = hod__pb2._QUERYREQUEST
@@ -186,28 +186,28 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 QualifyRequest = _reflection.GeneratedProtocolMessageType('QualifyRequest', (_message.Message,), dict(
   DESCRIPTOR = _QUALIFYREQUEST,
   __module__ = 'mortar_pb2'
-  # @@protoc_insertion_point(class_scope:proto.QualifyRequest)
+  # @@protoc_insertion_point(class_scope:mdalgrpc.QualifyRequest)
   ))
 _sym_db.RegisterMessage(QualifyRequest)
 
 QualifyResponse = _reflection.GeneratedProtocolMessageType('QualifyResponse', (_message.Message,), dict(
   DESCRIPTOR = _QUALIFYRESPONSE,
   __module__ = 'mortar_pb2'
-  # @@protoc_insertion_point(class_scope:proto.QualifyResponse)
+  # @@protoc_insertion_point(class_scope:mdalgrpc.QualifyResponse)
   ))
 _sym_db.RegisterMessage(QualifyResponse)
 
 FetchRequest = _reflection.GeneratedProtocolMessageType('FetchRequest', (_message.Message,), dict(
   DESCRIPTOR = _FETCHREQUEST,
   __module__ = 'mortar_pb2'
-  # @@protoc_insertion_point(class_scope:proto.FetchRequest)
+  # @@protoc_insertion_point(class_scope:mdalgrpc.FetchRequest)
   ))
 _sym_db.RegisterMessage(FetchRequest)
 
 FetchResponse = _reflection.GeneratedProtocolMessageType('FetchResponse', (_message.Message,), dict(
   DESCRIPTOR = _FETCHRESPONSE,
   __module__ = 'mortar_pb2'
-  # @@protoc_insertion_point(class_scope:proto.FetchResponse)
+  # @@protoc_insertion_point(class_scope:mdalgrpc.FetchResponse)
   ))
 _sym_db.RegisterMessage(FetchResponse)
 
@@ -215,16 +215,16 @@ _sym_db.RegisterMessage(FetchResponse)
 
 _MORTAR = _descriptor.ServiceDescriptor(
   name='Mortar',
-  full_name='proto.Mortar',
+  full_name='mdalgrpc.Mortar',
   file=DESCRIPTOR,
   index=0,
   options=None,
-  serialized_start=370,
-  serialized_end=548,
+  serialized_start=385,
+  serialized_end=575,
   methods=[
   _descriptor.MethodDescriptor(
     name='Qualify',
-    full_name='proto.Mortar.Qualify',
+    full_name='mdalgrpc.Mortar.Qualify',
     index=0,
     containing_service=None,
     input_type=_QUALIFYREQUEST,
@@ -233,7 +233,7 @@ _MORTAR = _descriptor.ServiceDescriptor(
   ),
   _descriptor.MethodDescriptor(
     name='Fetch',
-    full_name='proto.Mortar.Fetch',
+    full_name='mdalgrpc.Mortar.Fetch',
     index=1,
     containing_service=None,
     input_type=_FETCHREQUEST,

@@ -22,7 +22,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/protoQueryResponse"
+              "$ref": "#/definitions/mdalgrpcQueryResponse"
             }
           }
         },
@@ -32,7 +32,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/protoQueryRequest"
+              "$ref": "#/definitions/mdalgrpcQueryRequest"
             }
           }
         ],
@@ -43,7 +43,7 @@
     }
   },
   "definitions": {
-    "protoQueryRequest": {
+    "mdalgrpcQueryRequest": {
       "type": "object",
       "properties": {
         "query": {
@@ -51,7 +51,7 @@
         }
       }
     },
-    "protoQueryResponse": {
+    "mdalgrpcQueryResponse": {
       "type": "object",
       "properties": {
         "variable": {
@@ -63,7 +63,7 @@
         "rows": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/protoRow"
+            "$ref": "#/definitions/mdalgrpcRow"
           }
         },
         "count": {
@@ -82,18 +82,18 @@
         }
       }
     },
-    "protoRow": {
+    "mdalgrpcRow": {
       "type": "object",
       "properties": {
         "uris": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/protoURI"
+            "$ref": "#/definitions/mdalgrpcURI"
           }
         }
       }
     },
-    "protoURI": {
+    "mdalgrpcURI": {
       "type": "object",
       "properties": {
         "namespace": {

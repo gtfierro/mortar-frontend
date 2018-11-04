@@ -15,12 +15,12 @@ class MortarStub(object):
       channel: A grpc.Channel.
     """
     self.Qualify = channel.unary_unary(
-        '/proto.Mortar/Qualify',
+        '/mdalgrpc.Mortar/Qualify',
         request_serializer=mortar__pb2.QualifyRequest.SerializeToString,
         response_deserializer=mortar__pb2.QualifyResponse.FromString,
         )
     self.Fetch = channel.unary_unary(
-        '/proto.Mortar/Fetch',
+        '/mdalgrpc.Mortar/Fetch',
         request_serializer=mortar__pb2.FetchRequest.SerializeToString,
         response_deserializer=mortar__pb2.FetchResponse.FromString,
         )
@@ -59,5 +59,5 @@ def add_MortarServicer_to_server(servicer, server):
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(
-      'proto.Mortar', rpc_method_handlers)
+      'mdalgrpc.Mortar', rpc_method_handlers)
   server.add_generic_rpc_handlers((generic_handler,))

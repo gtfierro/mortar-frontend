@@ -19,15 +19,15 @@ from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='mdal.proto',
-  package='proto',
+  package='mdalgrpc',
   syntax='proto3',
-  serialized_pb=_b('\n\nmdal.proto\x12\x05proto\x1a\x1cgoogle/api/annotations.proto\"\xcd\x02\n\x10\x44\x61taQueryRequest\x12\x13\n\x0b\x63omposition\x18\x01 \x03(\t\x12=\n\x0b\x61ggregation\x18\x02 \x03(\x0b\x32(.proto.DataQueryRequest.AggregationEntry\x12\x39\n\tvariables\x18\x03 \x03(\x0b\x32&.proto.DataQueryRequest.VariablesEntry\x12\x1f\n\x04time\x18\x04 \x01(\x0b\x32\x11.proto.TimeParams\x1a\x46\n\x10\x41ggregationEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12!\n\x05value\x18\x02 \x01(\x0b\x32\x12.proto.Aggregation:\x02\x38\x01\x1a\x41\n\x0eVariablesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x1e\n\x05value\x18\x02 \x01(\x0b\x32\x0f.proto.Variable:\x02\x38\x01\"J\n\x08Variable\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x12\n\ndefinition\x18\x02 \x01(\t\x12\r\n\x05uuids\x18\x03 \x03(\t\x12\r\n\x05units\x18\x04 \x01(\t\"I\n\nTimeParams\x12\r\n\x05start\x18\x01 \x01(\t\x12\x0b\n\x03\x65nd\x18\x02 \x01(\t\x12\x0e\n\x06window\x18\x03 \x01(\t\x12\x0f\n\x07\x61ligned\x18\x04 \x01(\x08\",\n\x0b\x41ggregation\x12\x1d\n\x05\x66uncs\x18\x01 \x03(\x0e\x32\x0e.proto.AggFunc\"\x93\x04\n\x11\x44\x61taQueryResponse\x12*\n\x04rows\x18\x01 \x03(\x0b\x32\x1c.proto.DataQueryResponse.Row\x12\x36\n\x07mapping\x18\x02 \x03(\x0b\x32%.proto.DataQueryResponse.MappingEntry\x12-\n\x07\x63ontext\x18\x03 \x03(\x0b\x32\x1c.proto.DataQueryResponse.Row\x12\r\n\x05uuids\x18\x04 \x03(\t\x12\r\n\x05\x61rrow\x18\x05 \x01(\x0c\x12\r\n\x05\x65rror\x18\x06 \x01(\t\x12\r\n\x05times\x18\x07 \x03(\x03\x12\x33\n\x06values\x18\x08 \x03(\x0b\x32#.proto.DataQueryResponse.ValueArray\x1as\n\x03Row\x12\x0c\n\x04uuid\x18\x01 \x01(\t\x12\x32\n\x03row\x18\x02 \x03(\x0b\x32%.proto.DataQueryResponse.Row.RowEntry\x1a*\n\x08RowEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x1a\x17\n\x06VarMap\x12\r\n\x05uuids\x18\x01 \x03(\x0c\x1a\x1b\n\nValueArray\x12\r\n\x05value\x18\x01 \x03(\x01\x1aO\n\x0cMappingEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12.\n\x05value\x18\x02 \x01(\x0b\x32\x1f.proto.DataQueryResponse.VarMap:\x02\x38\x01*B\n\x07\x41ggFunc\x12\x07\n\x03RAW\x10\x00\x12\x08\n\x04MEAN\x10\x01\x12\x07\n\x03MIN\x10\x02\x12\x07\n\x03MAX\x10\x03\x12\t\n\x05\x43OUNT\x10\x04\x12\x07\n\x03SUM\x10\x05\x32\xc2\x01\n\x04MDAL\x12[\n\tDataQuery\x12\x17.proto.DataQueryRequest\x1a\x18.proto.DataQueryResponse\"\x19\x82\xd3\xe4\x93\x02\x13\"\x0e/v1/mdal/query:\x01*0\x01\x12]\n\nDataQuery2\x12\x17.proto.DataQueryRequest\x1a\x18.proto.DataQueryResponse\"\x1a\x82\xd3\xe4\x93\x02\x14\"\x0f/v1/mdal/query2:\x01*0\x01\x62\x06proto3')
+  serialized_pb=_b('\n\nmdal.proto\x12\x08mdalgrpc\x1a\x1cgoogle/api/annotations.proto\"\xdc\x02\n\x10\x44\x61taQueryRequest\x12\x13\n\x0b\x63omposition\x18\x01 \x03(\t\x12@\n\x0b\x61ggregation\x18\x02 \x03(\x0b\x32+.mdalgrpc.DataQueryRequest.AggregationEntry\x12<\n\tvariables\x18\x03 \x03(\x0b\x32).mdalgrpc.DataQueryRequest.VariablesEntry\x12\"\n\x04time\x18\x04 \x01(\x0b\x32\x14.mdalgrpc.TimeParams\x1aI\n\x10\x41ggregationEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12$\n\x05value\x18\x02 \x01(\x0b\x32\x15.mdalgrpc.Aggregation:\x02\x38\x01\x1a\x44\n\x0eVariablesEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12!\n\x05value\x18\x02 \x01(\x0b\x32\x12.mdalgrpc.Variable:\x02\x38\x01\"J\n\x08Variable\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x12\n\ndefinition\x18\x02 \x01(\t\x12\r\n\x05uuids\x18\x03 \x03(\t\x12\r\n\x05units\x18\x04 \x01(\t\"I\n\nTimeParams\x12\r\n\x05start\x18\x01 \x01(\t\x12\x0b\n\x03\x65nd\x18\x02 \x01(\t\x12\x0e\n\x06window\x18\x03 \x01(\t\x12\x0f\n\x07\x61ligned\x18\x04 \x01(\x08\"/\n\x0b\x41ggregation\x12 \n\x05\x66uncs\x18\x01 \x03(\x0e\x32\x11.mdalgrpc.AggFunc\"\xa5\x04\n\x11\x44\x61taQueryResponse\x12-\n\x04rows\x18\x01 \x03(\x0b\x32\x1f.mdalgrpc.DataQueryResponse.Row\x12\x39\n\x07mapping\x18\x02 \x03(\x0b\x32(.mdalgrpc.DataQueryResponse.MappingEntry\x12\x30\n\x07\x63ontext\x18\x03 \x03(\x0b\x32\x1f.mdalgrpc.DataQueryResponse.Row\x12\r\n\x05uuids\x18\x04 \x03(\t\x12\r\n\x05\x61rrow\x18\x05 \x01(\x0c\x12\r\n\x05\x65rror\x18\x06 \x01(\t\x12\r\n\x05times\x18\x07 \x03(\x03\x12\x36\n\x06values\x18\x08 \x03(\x0b\x32&.mdalgrpc.DataQueryResponse.ValueArray\x1av\n\x03Row\x12\x0c\n\x04uuid\x18\x01 \x01(\t\x12\x35\n\x03row\x18\x02 \x03(\x0b\x32(.mdalgrpc.DataQueryResponse.Row.RowEntry\x1a*\n\x08RowEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x1a\x17\n\x06VarMap\x12\r\n\x05uuids\x18\x01 \x03(\x0c\x1a\x1b\n\nValueArray\x12\r\n\x05value\x18\x01 \x03(\x01\x1aR\n\x0cMappingEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x31\n\x05value\x18\x02 \x01(\x0b\x32\".mdalgrpc.DataQueryResponse.VarMap:\x02\x38\x01*B\n\x07\x41ggFunc\x12\x07\n\x03RAW\x10\x00\x12\x08\n\x04MEAN\x10\x01\x12\x07\n\x03MIN\x10\x02\x12\x07\n\x03MAX\x10\x03\x12\t\n\x05\x43OUNT\x10\x04\x12\x07\n\x03SUM\x10\x05\x32\xce\x01\n\x04MDAL\x12\x61\n\tDataQuery\x12\x1a.mdalgrpc.DataQueryRequest\x1a\x1b.mdalgrpc.DataQueryResponse\"\x19\x82\xd3\xe4\x93\x02\x13\"\x0e/v1/mdal/query:\x01*0\x01\x12\x63\n\nDataQuery2\x12\x1a.mdalgrpc.DataQueryRequest\x1a\x1b.mdalgrpc.DataQueryResponse\"\x1a\x82\xd3\xe4\x93\x02\x14\"\x0f/v1/mdal/query2:\x01*0\x01\x62\x06proto3')
   ,
   dependencies=[google_dot_api_dot_annotations__pb2.DESCRIPTOR,])
 
 _AGGFUNC = _descriptor.EnumDescriptor(
   name='AggFunc',
-  full_name='proto.AggFunc',
+  full_name='mdalgrpc.AggFunc',
   filename=None,
   file=DESCRIPTOR,
   values=[
@@ -58,8 +58,8 @@ _AGGFUNC = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=1118,
-  serialized_end=1184,
+  serialized_start=1157,
+  serialized_end=1223,
 )
 _sym_db.RegisterEnumDescriptor(_AGGFUNC)
 
@@ -75,20 +75,20 @@ SUM = 5
 
 _DATAQUERYREQUEST_AGGREGATIONENTRY = _descriptor.Descriptor(
   name='AggregationEntry',
-  full_name='proto.DataQueryRequest.AggregationEntry',
+  full_name='mdalgrpc.DataQueryRequest.AggregationEntry',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='key', full_name='proto.DataQueryRequest.AggregationEntry.key', index=0,
+      name='key', full_name='mdalgrpc.DataQueryRequest.AggregationEntry.key', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='value', full_name='proto.DataQueryRequest.AggregationEntry.value', index=1,
+      name='value', full_name='mdalgrpc.DataQueryRequest.AggregationEntry.value', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -106,26 +106,26 @@ _DATAQUERYREQUEST_AGGREGATIONENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=248,
-  serialized_end=318,
+  serialized_start=260,
+  serialized_end=333,
 )
 
 _DATAQUERYREQUEST_VARIABLESENTRY = _descriptor.Descriptor(
   name='VariablesEntry',
-  full_name='proto.DataQueryRequest.VariablesEntry',
+  full_name='mdalgrpc.DataQueryRequest.VariablesEntry',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='key', full_name='proto.DataQueryRequest.VariablesEntry.key', index=0,
+      name='key', full_name='mdalgrpc.DataQueryRequest.VariablesEntry.key', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='value', full_name='proto.DataQueryRequest.VariablesEntry.value', index=1,
+      name='value', full_name='mdalgrpc.DataQueryRequest.VariablesEntry.value', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -143,40 +143,40 @@ _DATAQUERYREQUEST_VARIABLESENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=320,
-  serialized_end=385,
+  serialized_start=335,
+  serialized_end=403,
 )
 
 _DATAQUERYREQUEST = _descriptor.Descriptor(
   name='DataQueryRequest',
-  full_name='proto.DataQueryRequest',
+  full_name='mdalgrpc.DataQueryRequest',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='composition', full_name='proto.DataQueryRequest.composition', index=0,
+      name='composition', full_name='mdalgrpc.DataQueryRequest.composition', index=0,
       number=1, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='aggregation', full_name='proto.DataQueryRequest.aggregation', index=1,
+      name='aggregation', full_name='mdalgrpc.DataQueryRequest.aggregation', index=1,
       number=2, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='variables', full_name='proto.DataQueryRequest.variables', index=2,
+      name='variables', full_name='mdalgrpc.DataQueryRequest.variables', index=2,
       number=3, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='time', full_name='proto.DataQueryRequest.time', index=3,
+      name='time', full_name='mdalgrpc.DataQueryRequest.time', index=3,
       number=4, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -194,41 +194,41 @@ _DATAQUERYREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=52,
-  serialized_end=385,
+  serialized_start=55,
+  serialized_end=403,
 )
 
 
 _VARIABLE = _descriptor.Descriptor(
   name='Variable',
-  full_name='proto.Variable',
+  full_name='mdalgrpc.Variable',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='name', full_name='proto.Variable.name', index=0,
+      name='name', full_name='mdalgrpc.Variable.name', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='definition', full_name='proto.Variable.definition', index=1,
+      name='definition', full_name='mdalgrpc.Variable.definition', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='uuids', full_name='proto.Variable.uuids', index=2,
+      name='uuids', full_name='mdalgrpc.Variable.uuids', index=2,
       number=3, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='units', full_name='proto.Variable.units', index=3,
+      name='units', full_name='mdalgrpc.Variable.units', index=3,
       number=4, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -246,41 +246,41 @@ _VARIABLE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=387,
-  serialized_end=461,
+  serialized_start=405,
+  serialized_end=479,
 )
 
 
 _TIMEPARAMS = _descriptor.Descriptor(
   name='TimeParams',
-  full_name='proto.TimeParams',
+  full_name='mdalgrpc.TimeParams',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='start', full_name='proto.TimeParams.start', index=0,
+      name='start', full_name='mdalgrpc.TimeParams.start', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='end', full_name='proto.TimeParams.end', index=1,
+      name='end', full_name='mdalgrpc.TimeParams.end', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='window', full_name='proto.TimeParams.window', index=2,
+      name='window', full_name='mdalgrpc.TimeParams.window', index=2,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='aligned', full_name='proto.TimeParams.aligned', index=3,
+      name='aligned', full_name='mdalgrpc.TimeParams.aligned', index=3,
       number=4, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
@@ -298,20 +298,20 @@ _TIMEPARAMS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=463,
-  serialized_end=536,
+  serialized_start=481,
+  serialized_end=554,
 )
 
 
 _AGGREGATION = _descriptor.Descriptor(
   name='Aggregation',
-  full_name='proto.Aggregation',
+  full_name='mdalgrpc.Aggregation',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='funcs', full_name='proto.Aggregation.funcs', index=0,
+      name='funcs', full_name='mdalgrpc.Aggregation.funcs', index=0,
       number=1, type=14, cpp_type=8, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -329,27 +329,27 @@ _AGGREGATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=538,
-  serialized_end=582,
+  serialized_start=556,
+  serialized_end=603,
 )
 
 
 _DATAQUERYRESPONSE_ROW_ROWENTRY = _descriptor.Descriptor(
   name='RowEntry',
-  full_name='proto.DataQueryResponse.Row.RowEntry',
+  full_name='mdalgrpc.DataQueryResponse.Row.RowEntry',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='key', full_name='proto.DataQueryResponse.Row.RowEntry.key', index=0,
+      name='key', full_name='mdalgrpc.DataQueryResponse.Row.RowEntry.key', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='value', full_name='proto.DataQueryResponse.Row.RowEntry.value', index=1,
+      name='value', full_name='mdalgrpc.DataQueryResponse.Row.RowEntry.value', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -367,26 +367,26 @@ _DATAQUERYRESPONSE_ROW_ROWENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=939,
-  serialized_end=981,
+  serialized_start=975,
+  serialized_end=1017,
 )
 
 _DATAQUERYRESPONSE_ROW = _descriptor.Descriptor(
   name='Row',
-  full_name='proto.DataQueryResponse.Row',
+  full_name='mdalgrpc.DataQueryResponse.Row',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='uuid', full_name='proto.DataQueryResponse.Row.uuid', index=0,
+      name='uuid', full_name='mdalgrpc.DataQueryResponse.Row.uuid', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='row', full_name='proto.DataQueryResponse.Row.row', index=1,
+      name='row', full_name='mdalgrpc.DataQueryResponse.Row.row', index=1,
       number=2, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -404,19 +404,19 @@ _DATAQUERYRESPONSE_ROW = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=866,
-  serialized_end=981,
+  serialized_start=899,
+  serialized_end=1017,
 )
 
 _DATAQUERYRESPONSE_VARMAP = _descriptor.Descriptor(
   name='VarMap',
-  full_name='proto.DataQueryResponse.VarMap',
+  full_name='mdalgrpc.DataQueryResponse.VarMap',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='uuids', full_name='proto.DataQueryResponse.VarMap.uuids', index=0,
+      name='uuids', full_name='mdalgrpc.DataQueryResponse.VarMap.uuids', index=0,
       number=1, type=12, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -434,19 +434,19 @@ _DATAQUERYRESPONSE_VARMAP = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=983,
-  serialized_end=1006,
+  serialized_start=1019,
+  serialized_end=1042,
 )
 
 _DATAQUERYRESPONSE_VALUEARRAY = _descriptor.Descriptor(
   name='ValueArray',
-  full_name='proto.DataQueryResponse.ValueArray',
+  full_name='mdalgrpc.DataQueryResponse.ValueArray',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='value', full_name='proto.DataQueryResponse.ValueArray.value', index=0,
+      name='value', full_name='mdalgrpc.DataQueryResponse.ValueArray.value', index=0,
       number=1, type=1, cpp_type=5, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -464,26 +464,26 @@ _DATAQUERYRESPONSE_VALUEARRAY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1008,
-  serialized_end=1035,
+  serialized_start=1044,
+  serialized_end=1071,
 )
 
 _DATAQUERYRESPONSE_MAPPINGENTRY = _descriptor.Descriptor(
   name='MappingEntry',
-  full_name='proto.DataQueryResponse.MappingEntry',
+  full_name='mdalgrpc.DataQueryResponse.MappingEntry',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='key', full_name='proto.DataQueryResponse.MappingEntry.key', index=0,
+      name='key', full_name='mdalgrpc.DataQueryResponse.MappingEntry.key', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='value', full_name='proto.DataQueryResponse.MappingEntry.value', index=1,
+      name='value', full_name='mdalgrpc.DataQueryResponse.MappingEntry.value', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -501,68 +501,68 @@ _DATAQUERYRESPONSE_MAPPINGENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1037,
-  serialized_end=1116,
+  serialized_start=1073,
+  serialized_end=1155,
 )
 
 _DATAQUERYRESPONSE = _descriptor.Descriptor(
   name='DataQueryResponse',
-  full_name='proto.DataQueryResponse',
+  full_name='mdalgrpc.DataQueryResponse',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='rows', full_name='proto.DataQueryResponse.rows', index=0,
+      name='rows', full_name='mdalgrpc.DataQueryResponse.rows', index=0,
       number=1, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='mapping', full_name='proto.DataQueryResponse.mapping', index=1,
+      name='mapping', full_name='mdalgrpc.DataQueryResponse.mapping', index=1,
       number=2, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='context', full_name='proto.DataQueryResponse.context', index=2,
+      name='context', full_name='mdalgrpc.DataQueryResponse.context', index=2,
       number=3, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='uuids', full_name='proto.DataQueryResponse.uuids', index=3,
+      name='uuids', full_name='mdalgrpc.DataQueryResponse.uuids', index=3,
       number=4, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='arrow', full_name='proto.DataQueryResponse.arrow', index=4,
+      name='arrow', full_name='mdalgrpc.DataQueryResponse.arrow', index=4,
       number=5, type=12, cpp_type=9, label=1,
       has_default_value=False, default_value=_b(""),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='error', full_name='proto.DataQueryResponse.error', index=5,
+      name='error', full_name='mdalgrpc.DataQueryResponse.error', index=5,
       number=6, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='times', full_name='proto.DataQueryResponse.times', index=6,
+      name='times', full_name='mdalgrpc.DataQueryResponse.times', index=6,
       number=7, type=3, cpp_type=2, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='values', full_name='proto.DataQueryResponse.values', index=7,
+      name='values', full_name='mdalgrpc.DataQueryResponse.values', index=7,
       number=8, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -580,8 +580,8 @@ _DATAQUERYRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=585,
-  serialized_end=1116,
+  serialized_start=606,
+  serialized_end=1155,
 )
 
 _DATAQUERYREQUEST_AGGREGATIONENTRY.fields_by_name['value'].message_type = _AGGREGATION
@@ -616,19 +616,19 @@ DataQueryRequest = _reflection.GeneratedProtocolMessageType('DataQueryRequest', 
   AggregationEntry = _reflection.GeneratedProtocolMessageType('AggregationEntry', (_message.Message,), dict(
     DESCRIPTOR = _DATAQUERYREQUEST_AGGREGATIONENTRY,
     __module__ = 'mdal_pb2'
-    # @@protoc_insertion_point(class_scope:proto.DataQueryRequest.AggregationEntry)
+    # @@protoc_insertion_point(class_scope:mdalgrpc.DataQueryRequest.AggregationEntry)
     ))
   ,
 
   VariablesEntry = _reflection.GeneratedProtocolMessageType('VariablesEntry', (_message.Message,), dict(
     DESCRIPTOR = _DATAQUERYREQUEST_VARIABLESENTRY,
     __module__ = 'mdal_pb2'
-    # @@protoc_insertion_point(class_scope:proto.DataQueryRequest.VariablesEntry)
+    # @@protoc_insertion_point(class_scope:mdalgrpc.DataQueryRequest.VariablesEntry)
     ))
   ,
   DESCRIPTOR = _DATAQUERYREQUEST,
   __module__ = 'mdal_pb2'
-  # @@protoc_insertion_point(class_scope:proto.DataQueryRequest)
+  # @@protoc_insertion_point(class_scope:mdalgrpc.DataQueryRequest)
   ))
 _sym_db.RegisterMessage(DataQueryRequest)
 _sym_db.RegisterMessage(DataQueryRequest.AggregationEntry)
@@ -637,21 +637,21 @@ _sym_db.RegisterMessage(DataQueryRequest.VariablesEntry)
 Variable = _reflection.GeneratedProtocolMessageType('Variable', (_message.Message,), dict(
   DESCRIPTOR = _VARIABLE,
   __module__ = 'mdal_pb2'
-  # @@protoc_insertion_point(class_scope:proto.Variable)
+  # @@protoc_insertion_point(class_scope:mdalgrpc.Variable)
   ))
 _sym_db.RegisterMessage(Variable)
 
 TimeParams = _reflection.GeneratedProtocolMessageType('TimeParams', (_message.Message,), dict(
   DESCRIPTOR = _TIMEPARAMS,
   __module__ = 'mdal_pb2'
-  # @@protoc_insertion_point(class_scope:proto.TimeParams)
+  # @@protoc_insertion_point(class_scope:mdalgrpc.TimeParams)
   ))
 _sym_db.RegisterMessage(TimeParams)
 
 Aggregation = _reflection.GeneratedProtocolMessageType('Aggregation', (_message.Message,), dict(
   DESCRIPTOR = _AGGREGATION,
   __module__ = 'mdal_pb2'
-  # @@protoc_insertion_point(class_scope:proto.Aggregation)
+  # @@protoc_insertion_point(class_scope:mdalgrpc.Aggregation)
   ))
 _sym_db.RegisterMessage(Aggregation)
 
@@ -662,38 +662,38 @@ DataQueryResponse = _reflection.GeneratedProtocolMessageType('DataQueryResponse'
     RowEntry = _reflection.GeneratedProtocolMessageType('RowEntry', (_message.Message,), dict(
       DESCRIPTOR = _DATAQUERYRESPONSE_ROW_ROWENTRY,
       __module__ = 'mdal_pb2'
-      # @@protoc_insertion_point(class_scope:proto.DataQueryResponse.Row.RowEntry)
+      # @@protoc_insertion_point(class_scope:mdalgrpc.DataQueryResponse.Row.RowEntry)
       ))
     ,
     DESCRIPTOR = _DATAQUERYRESPONSE_ROW,
     __module__ = 'mdal_pb2'
-    # @@protoc_insertion_point(class_scope:proto.DataQueryResponse.Row)
+    # @@protoc_insertion_point(class_scope:mdalgrpc.DataQueryResponse.Row)
     ))
   ,
 
   VarMap = _reflection.GeneratedProtocolMessageType('VarMap', (_message.Message,), dict(
     DESCRIPTOR = _DATAQUERYRESPONSE_VARMAP,
     __module__ = 'mdal_pb2'
-    # @@protoc_insertion_point(class_scope:proto.DataQueryResponse.VarMap)
+    # @@protoc_insertion_point(class_scope:mdalgrpc.DataQueryResponse.VarMap)
     ))
   ,
 
   ValueArray = _reflection.GeneratedProtocolMessageType('ValueArray', (_message.Message,), dict(
     DESCRIPTOR = _DATAQUERYRESPONSE_VALUEARRAY,
     __module__ = 'mdal_pb2'
-    # @@protoc_insertion_point(class_scope:proto.DataQueryResponse.ValueArray)
+    # @@protoc_insertion_point(class_scope:mdalgrpc.DataQueryResponse.ValueArray)
     ))
   ,
 
   MappingEntry = _reflection.GeneratedProtocolMessageType('MappingEntry', (_message.Message,), dict(
     DESCRIPTOR = _DATAQUERYRESPONSE_MAPPINGENTRY,
     __module__ = 'mdal_pb2'
-    # @@protoc_insertion_point(class_scope:proto.DataQueryResponse.MappingEntry)
+    # @@protoc_insertion_point(class_scope:mdalgrpc.DataQueryResponse.MappingEntry)
     ))
   ,
   DESCRIPTOR = _DATAQUERYRESPONSE,
   __module__ = 'mdal_pb2'
-  # @@protoc_insertion_point(class_scope:proto.DataQueryResponse)
+  # @@protoc_insertion_point(class_scope:mdalgrpc.DataQueryResponse)
   ))
 _sym_db.RegisterMessage(DataQueryResponse)
 _sym_db.RegisterMessage(DataQueryResponse.Row)
@@ -714,16 +714,16 @@ _DATAQUERYRESPONSE_MAPPINGENTRY._options = _descriptor._ParseOptions(descriptor_
 
 _MDAL = _descriptor.ServiceDescriptor(
   name='MDAL',
-  full_name='proto.MDAL',
+  full_name='mdalgrpc.MDAL',
   file=DESCRIPTOR,
   index=0,
   options=None,
-  serialized_start=1187,
-  serialized_end=1381,
+  serialized_start=1226,
+  serialized_end=1432,
   methods=[
   _descriptor.MethodDescriptor(
     name='DataQuery',
-    full_name='proto.MDAL.DataQuery',
+    full_name='mdalgrpc.MDAL.DataQuery',
     index=0,
     containing_service=None,
     input_type=_DATAQUERYREQUEST,
@@ -732,7 +732,7 @@ _MDAL = _descriptor.ServiceDescriptor(
   ),
   _descriptor.MethodDescriptor(
     name='DataQuery2',
-    full_name='proto.MDAL.DataQuery2',
+    full_name='mdalgrpc.MDAL.DataQuery2',
     index=1,
     containing_service=None,
     input_type=_DATAQUERYREQUEST,
