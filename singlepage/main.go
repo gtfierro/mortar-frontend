@@ -64,7 +64,7 @@ func main() {
 	}
 
 	grpcmux := runtime.NewServeMux()
-	opts := []grpc.DialOption{grpc.WithInsecure(), grpc.WithBlock(), grpc.FailOnNonTempDialError(true)} //, grpc.WithTransportCredentials(credentials.NewTLS(&tls.Config{}))}
+	opts := []grpc.DialOption{grpc.WithInsecure(), grpc.WithBlock(), grpc.FailOnNonTempDialError(true), grpc.WithDefaultCallOptions(grpc.MaxCallRecvMsgSize(64 * 1024 * 1024))} //, grpc.WithTransportCredentials(credentials.NewTLS(&tls.Config{}))}
 	//&tls.Config{}
 	fmt.Println("connect to corbusier mdal")
 	if err := mortarproto.RegisterMDALHandlerFromEndpoint(context.Background(), grpcmux, "corbusier.cs.berkeley.edu:8088", opts); err != nil {
