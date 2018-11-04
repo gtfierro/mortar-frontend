@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
-	"github.com/gtfierro/mortar/proto"
+	proto "github.com/gtfierro/mortar/proto"
 	"github.com/pkg/errors"
 	logrus "github.com/sirupsen/logrus"
 	"google.golang.org/grpc"

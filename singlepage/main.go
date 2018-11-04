@@ -44,7 +44,7 @@ func main() {
 	mux := http.NewServeMux()
 
 	// Mount admin interface to mux
-	Admin.MountTo("/admin", mux)
+	//Admin.MountTo("/admin", mux)
 
 	// initialize GRPC proxy
 	_ = cors.New(cors.Options{
