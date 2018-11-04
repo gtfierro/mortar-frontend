@@ -18,10 +18,6 @@ request = {
     },
 }
 
-def run(m, sites):
-    print(sites)
-    for site in sites:
-        res, objectid = m.fetch(site, request)
-        if res is None:
-            continue
-        yield objectid
+def run(m, site):
+    res = m.fetch(site, request)
+    return res

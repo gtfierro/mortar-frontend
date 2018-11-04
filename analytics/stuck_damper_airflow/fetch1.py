@@ -28,11 +28,7 @@ request = {
     },
 }
 
-def run(m, sites):
-    for site in sites:
-        print(site)
-        df, objectid = m.fetch(site, request)
-        if df is None:
-            continue
-        print(df.describe())
-        yield objectid
+def run(m, site):
+    print(site)
+    r = m.fetch(site, request)
+    return r

@@ -1,13 +1,12 @@
 
 def run(m, inobject):
-    data = m.cache.get(inobject).copy()
-
-    print('clean?')
     #df = data['raw'].copy()
-    #df.dropna(inplace=True)
+    df = inobject['df'].copy()
+    df.fillna(method='ffill',inplace=True)
+    df.dropna(inplace=True)
 
-    #data['cleaned'] = df
-    if len(data) == 0:
+    if len(df) == 0:
         return None
 
-    return m.cache.put(data)
+    inobject['cleaned'] = df
+    return inobject

@@ -1,5 +1,5 @@
 import pymortar
-m = pymortar.MortarClient('172.17.0.1:9001')
+m = pymortar.MortarClient()
 
 res = m.RUN("point_count.qualify1","point_count.fetch1", None, None)
 
