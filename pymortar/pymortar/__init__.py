@@ -1,5 +1,6 @@
 name = "pymortar"
 
+import logging
 import importlib
 import traceback
 import os
@@ -19,6 +20,8 @@ from pymortar import mortar_pb2
 from pymortar import mortar_pb2_grpc
 
 from pymortar import cache
+
+logging.basicConfig(level=logging.DEBUG)
 
 agg_funcs = {
     "RAW": mdal_pb2.RAW,
@@ -92,7 +95,6 @@ class MortarClient:
             #if len(resp.response.times) > pd.np.array(values).shape[1]:
             df = pd.DataFrame.from_records(values).T
             df.columns = resp.response.uuids
-            print(len(resp.response.uuids), len(set(resp.response.uuids)))
             df.index = pd.to_datetime(resp.response.times)
 
             mapping = {}
@@ -113,36 +115,47 @@ class MortarClient:
         if qualify is None or not isinstance(qualify, str):
             raise Exception("QUALIFY must be string path of module")
         qualifyrun = importlib.import_module(qualify)
+        logging.info("Imported qualify module {0}".format(qualify))
 
         if fetch is None or not isinstance(fetch, str):
             raise Exception("FETCH must be string path of module")
         fetchrun = importlib.import_module(fetch)
+        logging.info("Imported fetch module {0}".format(fetch))
 
         if clean is not None:
             cleanrun = importlib.import_module(clean)
+            logging.info("Imported clean module {0}".format(clean))
         else:
+            logging.info("No clean module")
             cleanrun = None
 
         if execute is not None:
             executerun = importlib.import_module(execute)
+            logging.info("Imported execute module {0}".format(execute))
         else:
+            logging.info("No execute module")
             executerun = None
 
         if aggregate is not None:
             aggregaterun = importlib.import_module(aggregate)
+            logging.info("Imported aggregate module {0}".format(aggregate))
         else:
+            logging.info("No aggregate module")
             aggregaterun = None
 
         # qualify to get execution set
         fromcache = self.cache.get(qualify)
         if fromcache:
+            logging.info("Pulling execution set from cache")
             sites = fromcache
         else:
+            logging.info("Running qualify")
             sites = qualifyrun.run(self)
             self.cache.put(qualify, sites)
 
         # run fetch on each site in execution set
         res = []
+        logging.info("Running on {0} sites".format(len(sites)))
         for site in sites:
             try:
                 # get from cache: keyed by site+fetch
@@ -168,4 +181,4 @@ class MortarClient:
                 traceback.print_exc()
 
         if aggregaterun:
-            aggregaterun(res)
+            aggregaterun.run(res)

@@ -3,6 +3,7 @@ sqlite3 - based caching layer and for tracking the sequence of things
 """
 
 import sqlite3
+import pandas as pd
 import base64
 import pyarrow.plasma as plasma
 

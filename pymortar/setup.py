@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 print(setuptools.find_packages())
 setuptools.setup(
     name="pymortar",
-    version="0.1.1",
+    version="0.1.3",
     author="Gabe Fierro",
     author_email="gtfierro@cs.berkeley.edu",
     description="Python3 Mortar",
