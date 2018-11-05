@@ -48,6 +48,10 @@ class MortarClient:
         ])
         self.stub = mortar_pb2_grpc.MortarStub(self.channel)
 
+    def clear_cache(self, modulename):
+        self.cache.delete_module_prefix(modulename)
+
+
     def qualify(self, required):
         q = [hod_pb2.QueryRequest(query=req) for req in required]
         sites = self.stub.Qualify(mortar_pb2.QualifyRequest(requiredqueries=q))
@@ -86,7 +90,7 @@ class MortarClient:
         resp = self.stub.Fetch(mortar_pb2.FetchRequest(request=params), timeout=120)
         if resp.error != "":
             raise Exception(resp.error)
-        
+
         #IPython.embed()
         values = [x.value for x in resp.response.values]
         if pd.np.array(values).size > 0:
@@ -164,15 +168,15 @@ class MortarClient:
                     siteres = fromcache
                 else:
                     siteres = fetchrun.run(self, site)
-                    if not siteres: continue
+                    if siteres is None: continue
                     self.cache.put(fetch, siteres, site)
 
                 if cleanrun:
                     siteres = cleanrun.run(self, siteres)
-                    if not siteres: continue
+                    if siteres is None: continue
                 if executerun:
                     siteres = executerun.run(self, siteres)
-                    if not siteres: continue
+                    if siteres is None: continue
                 if aggregaterun:
                     res.append(siteres)
                 else:

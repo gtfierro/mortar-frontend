@@ -27,6 +27,17 @@ class cache:
 
         self.conn.commit()
 
+    def delete_module_prefix(self, prefix):
+        prefix += '%'
+        res = self.c.execute("SELECT module, objectid FROM cache WHERE module LIKE ?", (prefix,))
+        res = list(res)
+        for row in res:
+            name = row[0]
+            objectid = row[1]
+            self.c.execute("DELETE FROM objects WHERE objectid=?", (objectid,))
+            self.c.execute("DELETE FROM cache WHERE objectid=?", (objectid,))
+        self.conn.commit()
+
     def hashToOID(self, b64hash):
         return plasma.ObjectID(base64.b64decode(b64hash))
 
