@@ -5,6 +5,8 @@ NOTEBOOK_FLAGS += --NotebookApp.allow_origin='*'
 NOTEBOOK_FLAGS += --NotebookApp.allow_remote_access=True
 JUPYTER_ENABLE_LAB=1
 
+PYMORTAR_VERSION=0.1.4
+
 # "mortar": sha1:7e7bf58db7c6:90d0c0a56c8a3b48236238c13a6af7de7fc03ebb
 
 DOCKER_RUN_FLAGS = \
@@ -24,9 +26,13 @@ run:
 	@echo GO TO https://localhost:8888/?token=$(CONTAINER_AUTH_TOKEN)
 	@echo "####################################################################################"
 	@echo
-	docker run -it --user=root $(DOCKER_RUN_FLAGS) pymortar
+	docker run -it --user=root $(DOCKER_RUN_FLAGS) gtfierro/pymortar:${PYMORTAR_VERSION}
 
 .PHONY: build
 build:
 	cp -r ../../analytics .
-	docker build -t pymortar .
+	docker build -t gtfierro/pymortar:${PYMORTAR_VERSION} .
+
+.PHONY: push
+push:
+	docker push gtfierro/pymortar:${PYMORTAR_VERSION}

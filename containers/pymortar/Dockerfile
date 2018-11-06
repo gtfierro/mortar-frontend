@@ -10,7 +10,7 @@ RUN pip install --upgrade numpy
 #RUN apt-get install 
 
 ADD analytics /home/jovyan/
-ENV MORTAR_API_ADDRESS 172.17.0.1:9001
+ENV MORTAR_API_ADDRESS api.mortardata.org:9001
 
 # execute
 ADD run.sh /opt/run.sh
