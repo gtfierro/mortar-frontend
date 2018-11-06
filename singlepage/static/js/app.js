@@ -447,7 +447,7 @@ const About = {
                     Documentation for Mortar and examples for how to use it are coming soon!\
                 </p>\
                 <p>\
-                    Please <a href="https://lists.eecs.berkeley.edu/sympa/subscribe/mortar-users">subscribe</a> to the <a href="mailto:mortar-users@lists.eecs.berkeley.edu">mortar-users</a> mailing list for updates and announcements\
+                    Please <a href="https://lists.eecs.berkeley.edu/sympa/subscribe/mortar-users">subscribe</a> to the <a href="mailto:mortar-users@lists.eecs.berkeley.edu">mortar-users</a> mailing list for updates, announcements, discussions and support.\
                 </p>\
             </v-flex>\
             <v-flex md6 xs12>\
