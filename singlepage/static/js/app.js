@@ -289,7 +289,7 @@ var hod = new Vue({
 /*
  *
  */
-const Home = {
+const BrickBrowse = {
     created: function() {
       var scope = this;
       this.$nextTick(function() {
@@ -429,16 +429,29 @@ const About = {
     template: '\
     <div>\
         <v-layout row wrap>\
+            <v-flex md6 xs12 class="px-5">\
+                <h4 class="text-xs-left headline">The <b>M</b>odular <b>O</b>pen <b>R</b>eproducibility <b>T</b>estbed for <b>A</b>nalysis and <b>R</b>esearch</h4>\
+                <v-alert class="my-5" :value="true" type="error">\
+                    <b>Mortar is not yet available!</b> Please <a href="https://lists.eecs.berkeley.edu/sympa/subscribe/mortar-users">subscribe</a> to the mortar-users mailing list for updates and announcements</a>\
+                </v-alert>\
+                <p>\
+                    Access to large amounts of real-world data has long been a barrier to the development and evaluation of analytics applications for the built environment. Open data sets exist, but they are limited in their <u>span</u> (how much data is available) and <u>context</u> (what kind of data is available and how it is described).\
+                </p>\
+                <p>\
+                    The goal of Mortar is to provide a large, diverse and consistently updated testbed of buildings and building data to facilitate reproducible evaluation of building analytics.\
+                </p>\
+                <p>\
+                    At this time, Mortar contains <b>107 buildings</b>, spanning over <b>10 billion data points</b> and <b>26,000 data streams</b>. Context for these data streams  is provided by a <a href="https://brickschema.org/">Brick model</a>. The Brick model describes for each building: (1) what data streams exist and what they measure, (2) what equipment exists and how it is monitored, (3) the relationships between equipment in terms of flows, composition and location.\
+                </p>\
+                <p>\
+                    Documentation for Mortar and examples for how to use it are coming soon!\
+                </p>\
+                <p>\
+                    Please <a href="https://lists.eecs.berkeley.edu/sympa/subscribe/mortar-users">subscribe</a> to the <a href="mailto:mortar-users@lists.eecs.berkeley.edu">mortar-users</a> mailing list for updates and announcements\
+                </p>\
+            </v-flex>\
             <v-flex md6 xs12>\
-                <h1 class="text-xs-left display-4 font-weight-bold">MORTAR</h1>\
-                <h3 class="text-xs-left display-1">Modular Open Reproducibility Testbed for Analysis and Research</h3>\
-                <p class="pt-5 text-xs-left body-2">\
-                    Access to large amounts of real-world data has long been a barrier to the development and evaluation of analytics applications for the built environment.\
-                    Open data sets exist, but they are limited in their <u>span</u> (how much data is available) and <u>context</u> (what kind of data is available and how it is described).\
-                </p>\
-                <p class="text-xs-left body-2">\
-                    Evaluation of such analytics is also limited by how the analytics themselves are implemented, often using hard-coded names of building components, points and locations, or unique input data formats.\
-                </p>\
+                <img src="img/brickgraphsample.png"></img>\
             </v-flex>\
         </v-layout>\
     </div>\
@@ -447,7 +460,8 @@ const About = {
 
 
 const routes = [
-  { path: '/', component: Home , name: 'home'},
+  { path: '/', component: About , name: 'home'},
+  { path: '/brick', component: BrickBrowse , name: 'brickbrowse'},
   { path: '/about', component: About , name: 'about'},
 ]
 
